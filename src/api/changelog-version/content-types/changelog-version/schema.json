@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "changelog_versions",
+  "info": {
+    "singularName": "changelog-version",
+    "pluralName": "changelog-versions",
+    "displayName": "Changelog Version"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "changelogs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::changelog.changelog",
+      "mappedBy": "changelog_version"
+    }
+  }
+}
