@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_pricing_pricing_faq_items",
+  "info": {
+    "displayName": "Pricing FAQ Item"
+  },
+  "options": {},
+  "attributes": {
+    "answer": {
+      "type": "blocks",
+      "required": true
+    },
+    "question": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

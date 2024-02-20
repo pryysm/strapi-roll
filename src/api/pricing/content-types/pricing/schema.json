@@ -1,0 +1,42 @@
+{
+  "kind": "singleType",
+  "collectionName": "pricings",
+  "info": {
+    "singularName": "pricing",
+    "pluralName": "pricings",
+    "displayName": "Pricing",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "faqTitle": {
+      "type": "string",
+      "required": true
+    },
+    "faqDescription": {
+      "type": "text",
+      "required": true
+    },
+    "headline": {
+      "type": "string",
+      "required": true
+    },
+    "faqs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "pricing.pricing-faq-item",
+      "required": true
+    }
+  }
+}

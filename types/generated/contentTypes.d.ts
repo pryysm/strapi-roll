@@ -857,6 +857,43 @@ export interface ApiChangelogVersionChangelogVersion
   };
 }
 
+export interface ApiPricingPricing extends Schema.SingleType {
+  collectionName: 'pricings';
+  info: {
+    singularName: 'pricing';
+    pluralName: 'pricings';
+    displayName: 'Pricing';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    faqTitle: Attribute.String & Attribute.Required;
+    faqDescription: Attribute.Text & Attribute.Required;
+    headline: Attribute.String & Attribute.Required;
+    faqs: Attribute.Component<'pricing.pricing-faq-item', true> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::pricing.pricing',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::pricing.pricing',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTestDataTestData extends Schema.CollectionType {
   collectionName: 'test_datas';
   info: {
@@ -908,6 +945,7 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::changelog.changelog': ApiChangelogChangelog;
       'api::changelog-version.changelog-version': ApiChangelogVersionChangelogVersion;
+      'api::pricing.pricing': ApiPricingPricing;
       'api::test-data.test-data': ApiTestDataTestData;
     }
   }
