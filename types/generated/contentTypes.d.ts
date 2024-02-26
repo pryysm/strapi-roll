@@ -824,12 +824,13 @@ export interface ApiBlogAuthorBlogAuthor extends Schema.CollectionType {
     singularName: 'blog-author';
     pluralName: 'blog-authors';
     displayName: 'Blog Author';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
+    name: Attribute.String & Attribute.Required;
     slug: Attribute.UID<'api::blog-author.blog-author', 'name'> &
       Attribute.Required;
     avatar: Attribute.Media & Attribute.Required;
