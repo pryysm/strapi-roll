@@ -781,6 +781,120 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiBlogBlog extends Schema.CollectionType {
+  collectionName: 'blogs';
+  info: {
+    singularName: 'blog';
+    pluralName: 'blogs';
+    displayName: 'Blog';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::blog.blog', 'title'> & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    body: Attribute.Blocks & Attribute.Required;
+    thumbnail: Attribute.Media & Attribute.Required;
+    blog_categories: Attribute.Relation<
+      'api::blog.blog',
+      'manyToMany',
+      'api::blog-category.blog-category'
+    >;
+    blog_author: Attribute.Relation<
+      'api::blog.blog',
+      'manyToOne',
+      'api::blog-author.blog-author'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogAuthorBlogAuthor extends Schema.CollectionType {
+  collectionName: 'blog_authors';
+  info: {
+    singularName: 'blog-author';
+    pluralName: 'blog-authors';
+    displayName: 'Blog Author';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    slug: Attribute.UID<'api::blog-author.blog-author', 'name'> &
+      Attribute.Required;
+    avatar: Attribute.Media & Attribute.Required;
+    role: Attribute.String & Attribute.Required;
+    blogs: Attribute.Relation<
+      'api::blog-author.blog-author',
+      'oneToMany',
+      'api::blog.blog'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-author.blog-author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-author.blog-author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogCategoryBlogCategory extends Schema.CollectionType {
+  collectionName: 'blog_categories';
+  info: {
+    singularName: 'blog-category';
+    pluralName: 'blog-categories';
+    displayName: 'Blog Category';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::blog-category.blog-category', 'title'> &
+      Attribute.Required;
+    blogs: Attribute.Relation<
+      'api::blog-category.blog-category',
+      'manyToMany',
+      'api::blog.blog'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-category.blog-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-category.blog-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiChangelogChangelog extends Schema.CollectionType {
   collectionName: 'changelogs';
   info: {
@@ -943,6 +1057,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::blog.blog': ApiBlogBlog;
+      'api::blog-author.blog-author': ApiBlogAuthorBlogAuthor;
+      'api::blog-category.blog-category': ApiBlogCategoryBlogCategory;
       'api::changelog.changelog': ApiChangelogChangelog;
       'api::changelog-version.changelog-version': ApiChangelogVersionChangelogVersion;
       'api::pricing.pricing': ApiPricingPricing;
