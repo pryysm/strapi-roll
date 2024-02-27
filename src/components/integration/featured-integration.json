@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_integration_featured_integrations",
+  "info": {
+    "displayName": "Featured Integration Item",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "builtBy": {
+      "type": "string",
+      "required": true
+    },
+    "learnMoreUrl": {
+      "type": "string",
+      "required": true
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

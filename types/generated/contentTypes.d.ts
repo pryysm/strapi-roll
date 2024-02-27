@@ -1066,6 +1066,43 @@ export interface ApiChangelogVersionChangelogVersion
   };
 }
 
+export interface ApiIntegrationIntegration extends Schema.SingleType {
+  collectionName: 'integrations';
+  info: {
+    singularName: 'integration';
+    pluralName: 'integrations';
+    displayName: 'Integration';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    headline: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    featuredIntegration: Attribute.Component<'integration.featured-integration-card'> &
+      Attribute.Required;
+    integrations: Attribute.Component<'integration.integration', true> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::integration.integration',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::integration.integration',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPricingPricing extends Schema.SingleType {
   collectionName: 'pricings';
   info: {
@@ -1159,6 +1196,7 @@ declare module '@strapi/types' {
       'api::case-study-industry.case-study-industry': ApiCaseStudyIndustryCaseStudyIndustry;
       'api::changelog.changelog': ApiChangelogChangelog;
       'api::changelog-version.changelog-version': ApiChangelogVersionChangelogVersion;
+      'api::integration.integration': ApiIntegrationIntegration;
       'api::pricing.pricing': ApiPricingPricing;
       'api::test-data.test-data': ApiTestDataTestData;
     }

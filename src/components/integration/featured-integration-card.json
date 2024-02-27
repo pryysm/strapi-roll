@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_integration_featured_integration_cards",
+  "info": {
+    "displayName": "Featured Integration Card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "integration.featured-integration",
+      "required": true
+    }
+  }
+}
