@@ -896,6 +896,100 @@ export interface ApiBlogCategoryBlogCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiCaseStudyCaseStudy extends Schema.CollectionType {
+  collectionName: 'case_studies';
+  info: {
+    singularName: 'case-study';
+    pluralName: 'case-studies';
+    displayName: 'Case Study';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::case-study.case-study', 'title'> &
+      Attribute.Required;
+    body: Attribute.Blocks & Attribute.Required;
+    thumbnail: Attribute.Media & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    customerWebsite: Attribute.String & Attribute.Required;
+    customerLogoSquare: Attribute.Media & Attribute.Required;
+    customerInvestor: Attribute.String & Attribute.Required;
+    customerSince: Attribute.Date & Attribute.Required;
+    customerPersonName: Attribute.String & Attribute.Required;
+    customerPersonRole: Attribute.String & Attribute.Required;
+    customerPersonQuote: Attribute.Text & Attribute.Required;
+    customerPersonAvatar: Attribute.Media & Attribute.Required;
+    customerName: Attribute.String & Attribute.Required;
+    customerLogoRectangle: Attribute.Media & Attribute.Required;
+    customerFounded: Attribute.String & Attribute.Required;
+    socials: Attribute.Component<'common.social', true> & Attribute.Required;
+    case_study_industry: Attribute.Relation<
+      'api::case-study.case-study',
+      'manyToOne',
+      'api::case-study-industry.case-study-industry'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::case-study.case-study',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::case-study.case-study',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCaseStudyIndustryCaseStudyIndustry
+  extends Schema.CollectionType {
+  collectionName: 'case_study_industries';
+  info: {
+    singularName: 'case-study-industry';
+    pluralName: 'case-study-industries';
+    displayName: 'Case Study Industry';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<
+      'api::case-study-industry.case-study-industry',
+      'name'
+    > &
+      Attribute.Required;
+    case_studies: Attribute.Relation<
+      'api::case-study-industry.case-study-industry',
+      'oneToMany',
+      'api::case-study.case-study'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::case-study-industry.case-study-industry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::case-study-industry.case-study-industry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiChangelogChangelog extends Schema.CollectionType {
   collectionName: 'changelogs';
   info: {
@@ -1061,6 +1155,8 @@ declare module '@strapi/types' {
       'api::blog.blog': ApiBlogBlog;
       'api::blog-author.blog-author': ApiBlogAuthorBlogAuthor;
       'api::blog-category.blog-category': ApiBlogCategoryBlogCategory;
+      'api::case-study.case-study': ApiCaseStudyCaseStudy;
+      'api::case-study-industry.case-study-industry': ApiCaseStudyIndustryCaseStudyIndustry;
       'api::changelog.changelog': ApiChangelogChangelog;
       'api::changelog-version.changelog-version': ApiChangelogVersionChangelogVersion;
       'api::pricing.pricing': ApiPricingPricing;

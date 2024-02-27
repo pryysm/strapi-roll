@@ -1,0 +1,109 @@
+{
+  "kind": "collectionType",
+  "collectionName": "case_studies",
+  "info": {
+    "singularName": "case-study",
+    "pluralName": "case-studies",
+    "displayName": "Case Study",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "body": {
+      "type": "blocks",
+      "required": true
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "customerWebsite": {
+      "type": "string",
+      "required": true
+    },
+    "customerLogoSquare": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "customerInvestor": {
+      "type": "string",
+      "required": true
+    },
+    "customerSince": {
+      "type": "date",
+      "required": true
+    },
+    "customerPersonName": {
+      "type": "string",
+      "required": true
+    },
+    "customerPersonRole": {
+      "type": "string",
+      "required": true
+    },
+    "customerPersonQuote": {
+      "type": "text",
+      "required": true
+    },
+    "customerPersonAvatar": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "customerName": {
+      "type": "string",
+      "required": true
+    },
+    "customerLogoRectangle": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "customerFounded": {
+      "type": "string",
+      "required": true
+    },
+    "socials": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.social",
+      "required": true
+    },
+    "case_study_industry": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::case-study-industry.case-study-industry",
+      "inversedBy": "case_studies"
+    }
+  }
+}
