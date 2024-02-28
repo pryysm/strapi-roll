@@ -37,6 +37,12 @@ export interface IntegrationFeaturedIntegration extends Schema.Component {
     learnMoreUrl: Attribute.String & Attribute.Required;
     logo: Attribute.Media & Attribute.Required;
     thumbnail: Attribute.Media & Attribute.Required;
+    website: Attribute.String & Attribute.Required;
+    categories: Attribute.String & Attribute.Required;
+    docs: Attribute.String & Attribute.Required;
+    body: Attribute.Blocks & Attribute.Required;
+    images: Attribute.Media & Attribute.Required;
+    contact: Attribute.String & Attribute.Required;
   };
 }
 
