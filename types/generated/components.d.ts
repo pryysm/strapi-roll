@@ -16,6 +16,7 @@ export interface AboutAboutPerson extends Schema.Component {
   collectionName: 'components_about_about_people';
   info: {
     displayName: 'About Person';
+    description: '';
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
