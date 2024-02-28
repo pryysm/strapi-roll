@@ -781,6 +781,42 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAboutAbout extends Schema.SingleType {
+  collectionName: 'abouts';
+  info: {
+    singularName: 'about';
+    pluralName: 'abouts';
+    displayName: 'About';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ceoName: Attribute.String & Attribute.Required;
+    ceoRole: Attribute.String & Attribute.Required;
+    ceoSocials: Attribute.Component<'common.social', true> & Attribute.Required;
+    ceoAvatar: Attribute.Media & Attribute.Required;
+    ceoQuote: Attribute.Text & Attribute.Required;
+    personGroups: Attribute.Component<'about.about-person-group', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiBlogBlog extends Schema.CollectionType {
   collectionName: 'blogs';
   info: {
@@ -1189,6 +1225,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::about.about': ApiAboutAbout;
       'api::blog.blog': ApiBlogBlog;
       'api::blog-author.blog-author': ApiBlogAuthorBlogAuthor;
       'api::blog-category.blog-category': ApiBlogCategoryBlogCategory;

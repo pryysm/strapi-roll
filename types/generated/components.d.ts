@@ -1,5 +1,29 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface AboutAboutPersonGroup extends Schema.Component {
+  collectionName: 'components_about_about_person_groups';
+  info: {
+    displayName: 'About Person Group';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    persons: Attribute.Component<'about.about-person', true> &
+      Attribute.Required;
+  };
+}
+
+export interface AboutAboutPerson extends Schema.Component {
+  collectionName: 'components_about_about_people';
+  info: {
+    displayName: 'About Person';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    role: Attribute.String & Attribute.Required;
+    avatar: Attribute.Media & Attribute.Required;
+  };
+}
+
 export interface CommonSocial extends Schema.Component {
   collectionName: 'components_common_socials';
   info: {
@@ -91,6 +115,8 @@ export interface PricingPricingFaqItem extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'about.about-person-group': AboutAboutPersonGroup;
+      'about.about-person': AboutAboutPerson;
       'common.social': CommonSocial;
       'integration.featured-integration-card': IntegrationFeaturedIntegrationCard;
       'integration.featured-integration': IntegrationFeaturedIntegration;

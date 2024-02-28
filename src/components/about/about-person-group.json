@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_about_about_person_groups",
+  "info": {
+    "displayName": "About Person Group"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "persons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "about.about-person",
+      "required": true
+    }
+  }
+}
