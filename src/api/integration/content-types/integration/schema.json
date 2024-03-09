@@ -1,5 +1,5 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "integrations",
   "info": {
     "singularName": "integration",
@@ -16,24 +16,91 @@
       "type": "string",
       "required": true
     },
-    "headline": {
+    "builtBy": {
       "type": "string",
       "required": true
+    },
+    "learnMoreUrl": {
+      "type": "string",
+      "required": true
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "website": {
+      "type": "string",
+      "required": true
+    },
+    "categories": {
+      "type": "string",
+      "required": true
+    },
+    "docs": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "blocks",
+      "required": true
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "contact": {
+      "type": "string",
+      "required": true
+    },
+    "primaryBadgeTitle": {
+      "type": "string",
+      "required": false
+    },
+    "primaryBadgeLogo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "secondaryBadgeTitle": {
+      "type": "string"
+    },
+    "integration_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::integration-category.integration-category",
+      "inversedBy": "integrations"
     },
     "description": {
       "type": "text",
       "required": true
     },
-    "featuredIntegration": {
-      "type": "component",
-      "repeatable": false,
-      "component": "integration.featured-integration-card",
+    "isPopular": {
+      "type": "boolean",
+      "default": false,
       "required": true
     },
-    "integrations": {
-      "type": "component",
-      "repeatable": true,
-      "component": "integration.integration",
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
       "required": true
     }
   }

@@ -1102,7 +1102,7 @@ export interface ApiChangelogVersionChangelogVersion
   };
 }
 
-export interface ApiIntegrationIntegration extends Schema.SingleType {
+export interface ApiIntegrationIntegration extends Schema.CollectionType {
   collectionName: 'integrations';
   info: {
     singularName: 'integration';
@@ -1115,11 +1115,29 @@ export interface ApiIntegrationIntegration extends Schema.SingleType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    headline: Attribute.String & Attribute.Required;
+    builtBy: Attribute.String & Attribute.Required;
+    learnMoreUrl: Attribute.String & Attribute.Required;
+    logo: Attribute.Media & Attribute.Required;
+    thumbnail: Attribute.Media & Attribute.Required;
+    website: Attribute.String & Attribute.Required;
+    categories: Attribute.String & Attribute.Required;
+    docs: Attribute.String & Attribute.Required;
+    body: Attribute.Blocks & Attribute.Required;
+    images: Attribute.Media & Attribute.Required;
+    contact: Attribute.String & Attribute.Required;
+    primaryBadgeTitle: Attribute.String;
+    primaryBadgeLogo: Attribute.Media;
+    secondaryBadgeTitle: Attribute.String;
+    integration_category: Attribute.Relation<
+      'api::integration.integration',
+      'manyToOne',
+      'api::integration-category.integration-category'
+    >;
     description: Attribute.Text & Attribute.Required;
-    featuredIntegration: Attribute.Component<'integration.featured-integration-card'> &
-      Attribute.Required;
-    integrations: Attribute.Component<'integration.integration', true> &
+    isPopular: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    slug: Attribute.UID<'api::integration.integration', 'title'> &
       Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1132,6 +1150,51 @@ export interface ApiIntegrationIntegration extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::integration.integration',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiIntegrationCategoryIntegrationCategory
+  extends Schema.CollectionType {
+  collectionName: 'integration_categories';
+  info: {
+    singularName: 'integration-category';
+    pluralName: 'integration-categories';
+    displayName: 'Integration Category';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    menuIcon: Attribute.Media & Attribute.Required;
+    showInMenu: Attribute.Boolean & Attribute.Required;
+    integrations: Attribute.Relation<
+      'api::integration-category.integration-category',
+      'oneToMany',
+      'api::integration.integration'
+    >;
+    slug: Attribute.UID<
+      'api::integration-category.integration-category',
+      'title'
+    > &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::integration-category.integration-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::integration-category.integration-category',
       'oneToOne',
       'admin::user'
     > &
@@ -1176,37 +1239,6 @@ export interface ApiPricingPricing extends Schema.SingleType {
   };
 }
 
-export interface ApiTestDataTestData extends Schema.CollectionType {
-  collectionName: 'test_datas';
-  info: {
-    singularName: 'test-data';
-    pluralName: 'test-datas';
-    displayName: 'test-data';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    label: Attribute.String;
-    isActive: Attribute.Boolean;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::test-data.test-data',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::test-data.test-data',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1234,8 +1266,8 @@ declare module '@strapi/types' {
       'api::changelog.changelog': ApiChangelogChangelog;
       'api::changelog-version.changelog-version': ApiChangelogVersionChangelogVersion;
       'api::integration.integration': ApiIntegrationIntegration;
+      'api::integration-category.integration-category': ApiIntegrationCategoryIntegrationCategory;
       'api::pricing.pricing': ApiPricingPricing;
-      'api::test-data.test-data': ApiTestDataTestData;
     }
   }
 }
