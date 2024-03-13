@@ -1139,7 +1139,11 @@ export interface ApiIntegrationIntegration extends Schema.CollectionType {
       Attribute.DefaultTo<false>;
     slug: Attribute.UID<'api::integration.integration', 'title'> &
       Attribute.Required;
-    titleHighlight: Attribute.String;
+    integration_examples: Attribute.Relation<
+      'api::integration.integration',
+      'oneToMany',
+      'api::integration-example.integration-example'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1196,6 +1200,44 @@ export interface ApiIntegrationCategoryIntegrationCategory
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::integration-category.integration-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiIntegrationExampleIntegrationExample
+  extends Schema.CollectionType {
+  collectionName: 'integration_examples';
+  info: {
+    singularName: 'integration-example';
+    pluralName: 'integration-examples';
+    displayName: 'Integration Example';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+    integration: Attribute.Relation<
+      'api::integration-example.integration-example',
+      'manyToOne',
+      'api::integration.integration'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::integration-example.integration-example',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::integration-example.integration-example',
       'oneToOne',
       'admin::user'
     > &
@@ -1268,6 +1310,7 @@ declare module '@strapi/types' {
       'api::changelog-version.changelog-version': ApiChangelogVersionChangelogVersion;
       'api::integration.integration': ApiIntegrationIntegration;
       'api::integration-category.integration-category': ApiIntegrationCategoryIntegrationCategory;
+      'api::integration-example.integration-example': ApiIntegrationExampleIntegrationExample;
       'api::pricing.pricing': ApiPricingPricing;
     }
   }

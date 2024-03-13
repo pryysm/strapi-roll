@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "integration_examples",
+  "info": {
+    "singularName": "integration-example",
+    "pluralName": "integration-examples",
+    "displayName": "Integration Example",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "integration": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::integration.integration",
+      "inversedBy": "integration_examples"
+    }
+  }
+}

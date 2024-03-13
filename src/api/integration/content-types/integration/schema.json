@@ -103,8 +103,11 @@
       "targetField": "title",
       "required": true
     },
-    "titleHighlight": {
-      "type": "string"
+    "integration_examples": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::integration-example.integration-example",
+      "mappedBy": "integration"
     }
   }
 }
