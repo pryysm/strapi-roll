@@ -1139,6 +1139,7 @@ export interface ApiIntegrationIntegration extends Schema.CollectionType {
       Attribute.DefaultTo<false>;
     slug: Attribute.UID<'api::integration.integration', 'title'> &
       Attribute.Required;
+    titleHighlight: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -102,6 +102,9 @@
       "type": "uid",
       "targetField": "title",
       "required": true
+    },
+    "titleHighlight": {
+      "type": "string"
     }
   }
 }
