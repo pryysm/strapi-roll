@@ -992,6 +992,7 @@ export interface ApiCaseStudyIndustryCaseStudyIndustry
     singularName: 'case-study-industry';
     pluralName: 'case-study-industries';
     displayName: 'Case Study Industry';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1008,6 +1009,7 @@ export interface ApiCaseStudyIndustryCaseStudyIndustry
       'oneToMany',
       'api::case-study.case-study'
     >;
+    icon: Attribute.Media & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

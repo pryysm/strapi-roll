@@ -4,7 +4,8 @@
   "info": {
     "singularName": "case-study-industry",
     "pluralName": "case-study-industries",
-    "displayName": "Case Study Industry"
+    "displayName": "Case Study Industry",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -25,6 +26,14 @@
       "relation": "oneToMany",
       "target": "api::case-study.case-study",
       "mappedBy": "case_study_industry"
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }
